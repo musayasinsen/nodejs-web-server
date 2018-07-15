@@ -1,22 +1,12 @@
 var express=require("express");
+var middleware=require("./middleware");
 var app=express();
 var PORT=3000;
 /*app.get("/",function(req,res)
 {
     res.send("Merhaba EXPRESS");
 })*/
-var middleware=
-{
-    requireAuthentication: function(req,res,next)
-    {
-        console.log("ÖZEL ROUTE GİRİLDİ");
-        next();
-    },logger:function(req,res,next)
-    {
-        console.log(req.method+" ile"+req.originalUrl+" sayfasına girildi");
-        next();
-    }
-}
+
 app.use(middleware.logger);
 app.get("/hakkimda",middleware.requireAuthentication,function(req,res)
 {
